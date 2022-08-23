@@ -1,0 +1,44 @@
+def balanceo(signo):
+  c=0
+  for i in range(0,largo-1):
+    if signo =="(":
+      signo2=")"
+    elif signo =="[":
+      signo2="]"
+    elif signo =="{":
+      signo2="}"
+    m1 = lista.count(signo)
+    m2 = lista.count(signo2)
+    dif = abs(m1-m2)
+    if dif == 0:
+      c=0
+    elif m1>m2:
+      c-=1
+      print("La ecuacion no esta balanceada")
+      for p in range(0,dif):
+        lista.append(signo2)
+      c+=1
+    elif m1<m2:
+      c-=1
+      print("La ecuacion no esta balanceada")
+      for p in range(0,dif):
+        lista.insert(0,signo)
+      c+=1
+    
+ecuacion = input("")
+lista = []
+largo = len(ecuacion)
+for n in range(0,largo):
+  lista.append(ecuacion[n])
+
+c=0
+for s in range(0,largo-1):
+  if lista[s] == "(":
+    func = balanceo(lista[s])
+  elif lista[s] == "[":
+    func = balanceo(lista[s])
+  elif lista[s] == "{":
+    func = balanceo(lista[s])
+
+if c == 0:
+  print("La ecuación está balanceada correctamente")
