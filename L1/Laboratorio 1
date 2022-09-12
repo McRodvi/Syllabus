@@ -1,0 +1,91 @@
+#voy a usar el cupón
+
+a1 = open("ejemplo.txt","w")
+a1.write("2 3"+"\n"+"mandíbula , pulmones"+"\n"+"lamprea , false , false"+"\n"+"robalo , true , false"+"\n"+"caiman , true , true")
+a1.close()
+
+a = [] # aquí se almacenarán las líneas del archivo
+with open('ejemplo.txt', 'r') as file:
+    lines = file.readlines() # Retorna una lista con cada lína del archivo
+    for line in lines:
+        a.append(line.strip()) # Sacar los saltos de línea (\n)
+    
+c = []
+c2 = []
+e = []
+e2 = []
+for i in range(0,len(a)):
+  if i == 0:
+    c = a[i].split(" ")
+    c2.append(c)
+    c2[0][0] = int(c2[0][0])
+    c2[0][1] = int(c2[0][1])
+  elif i == 1:
+    c = a[i].split(" , ")
+    c2.append(c)
+  elif i>1:
+    e = a[i].split(" , ")
+    e2.append(e)
+n = c2[0][1]
+t1 = 0
+t2 = 0
+print(c2)
+print(e2)
+
+from abc import ABCMeta, abstractmethod
+
+class Nodo(metaclass = ABCMeta):
+  @abstractmethod
+  def __init__(self, nodo_padre, nodos_hijos):
+    self.nodo_padre = []
+    self.nodos_hijos = []
+
+  @abstractmethod
+  def nodo_padre(self):
+    pass
+
+  @abstractmethod
+  def nodos_hijos(self):
+    pass
+
+  @abstractmethod
+  def imprimir_info(self):
+    pass
+
+class Caracter(Nodo):
+  def __init__(self, nombre):
+    self.nombre = nombre
+
+  def nodo_padre(self):
+    for i in range(0,len(e2)):
+      for j in range(0,len(e2[i])):
+        if e2[i][j] == "True":
+          t1 -= 1
+      if t1>=t2:
+        self.nodo_padre = []
+        self.nodo_padre.append(e2[j])
+      t1 = 0
+  
+  def nodos_hijos(self):
+    for i in range(0,len(e2)):
+      for j in range(0,len(e2[i])):
+        if e2[i][j] == "True":
+          t1 -= 1
+      if t1<t2:
+        self.nodos_hijos.append(e2[j])
+      t1 = 0
+
+class Especie(Nodo):
+  def __init__(self, nombre, caracter):
+    self.nombre = c2[i][0]
+    self.caracter = []
+
+  def nodo_padre(self):
+    for i in range(0,len(e2)):
+      for j in range(0,len(e2[i])):
+        if e2[i][j] == "True":
+          t1 -= 1
+      if t1>=t2:
+        self.nodo_padre = []
+        self.nodo_padre.append(e2[j])
+      t1 = 0
