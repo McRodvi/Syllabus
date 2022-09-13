@@ -1,0 +1,45 @@
+#Luego de tener descargados los archivos "categories.csv" y "netflix.csv":
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+df1 = pd.read_csv("netflix.csv")
+
+def conteo_nulo(x):
+  return sum(x == "Not Given") #Función explicada más abajo
+
+a = df1.apply(conteo_nulo, axis = 0) #Con este comando vamos a mostrar un conteo de cuántos "Not Given" tiene cada columna. Obtenemos que sólo las columnas "director" y "country" tienen información rellenada con "Not Given" o incompleta
+print(a) #Por lo tanto, vemos que las columnas "director" y "country" tienen información incompleta
+
+del df1["director"] #Con este comando vamos eliminar la columna "director", debido a que en el ítem 4 de consultas nunca se nos pregunta por los directores de cada película, por lo que no es información relevante y se puede eliminar la columna completa de "director"
+df1 = df1.loc[df1["country"] != "Not Given"] #Con este comando vamos a eliminar todas las filas en que aparezca "Not Given" al consultar por "country", ya que según nuestra función conteo_nulo(x), tan solo 287 de 8789 filas muestran "Not Given", lo que representa apenas un 3.265% de las películas, por lo que podemos despreciar estas filas para nuestra búsqueda
+display(df1) #Con este comando mostramos la visualización de la nueva base de datos, con las columnas y filas mencionadas anteriomente ya eliminadas
+
+#A continuación, visualizamos los datos de todas las columnas, luego de eliminar las columnas y filas ya mencionadas anteriormente
+v1 = df1["show_id"].value_counts()
+print(v1)
+print("------------------------------")
+v2 = df1["type"].value_counts()
+print(v2)
+print("------------------------------")
+v3 = df1["title"].value_counts()
+print(v3)
+print("------------------------------")
+v4 = df1["country"].value_counts()
+print(v4)
+print("------------------------------")
+v5 = df1["date_added"].value_counts()
+print(v5)
+print("------------------------------")
+v6 = df1["release_year"].value_counts()
+print(v6)
+print("------------------------------")
+v7 = df1["rating"].value_counts()
+print(v7)
+print("------------------------------")
+v8 = df1["duration"].value_counts()
+print(v8)
+print("------------------------------")
+v9 = df1["listed_in"].value_counts()
+print(v9)
